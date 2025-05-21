@@ -1,12 +1,66 @@
 ﻿<Window x:Class="course.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:course"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        xmlns:vm="clr-namespace:course.ViewModels"
+        xmlns:l="clr-namespace:course"
+        Title="{Binding Title}" 
+        Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+
+    </Window.DataContext>
+    <DockPanel >
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл" >
+                <MenuItem Header="Выход" />
+            </MenuItem>
+            <MenuItem Header="Помощь">
+                <MenuItem Header="о программе"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Text="{Binding Status}"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem>
+                <ProgressBar Width="120"
+                             Height="10" 
+                             Value="30"
+                             ></ProgressBar>
+            </StatusBarItem>
+        </StatusBar>
+        <TabControl>
+            <TabItem Header="Вкдадка 1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="88*"/>
+                        <RowDefinition Height="301*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="253*" MinWidth="100"/>
+                        <ColumnDefinition Width="541*" MinWidth="100" />
+                    </Grid.ColumnDefinitions>
+                    <Rectangle 
+                        Grid.Column="0" Grid.Row="0" Margin="5,7"
+                        Fill="Blue" Stroke="Red" StrokeThickness="5"
+                        RadiusX="20" RadiusY="20" ></Rectangle>
+                    <Ellipse Grid.Column="1" Grid.Row="0"
+                             Fill="Red" Stroke="Aqua" StrokeThickness="3">
+                        
+                    </Ellipse>
+                    <GridSplitter Width="3" 
+                                  Grid.Column="0"
+                                  Grid.RowSpan="2"
+                                  Grid.Row="0"
+                                  HorizontalAlignment="Right"
+                                  />
+                </Grid>
+                
+
+            </TabItem>
+            <TabItem Header="Вкдадка 2"></TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>

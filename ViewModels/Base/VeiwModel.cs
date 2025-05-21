@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace course.ViewModels.Base
 {
-    internal abstract class VeiwModel : INotifyPropertyChanged
+    internal abstract class VeiwModel : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null )
@@ -21,6 +21,26 @@ namespace course.ViewModels.Base
             field = value;
             OnPropertyChanged(PropertyName);
             return true;
+        }
+
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+
+
+        //~ViewModel()
+        //{
+        //    Dispose(false);
+        //}
+        private bool _Disposed;
+        protected virtual void Dispose(bool Disposing)
+        {
+            if (!Disposing || _Disposed) return;
+            _Disposed = true;
+            // Освобождение управляемых ресурсов
         }
     }
 }
