@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace course.InfraStructure.Commands.Base
 {
-    internal class Command : ICommand
+    internal abstract class Command : ICommand
     {
         public event EventHandler CanExecuteChanged
         {

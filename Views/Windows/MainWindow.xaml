@@ -3,18 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:vm="clr-namespace:course.ViewModels"
+        xmlns:cmd="clr-namespace:course.InfraStructure.Commands"
         xmlns:l="clr-namespace:course"
         Title="{Binding Title}" 
         Height="450" Width="800">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
-
+ 
     </Window.DataContext>
+    <Window.Resources>
+        <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+    </Window.Resources>
     <DockPanel >
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл" >
-                <MenuItem Header="Выход" />
+                <MenuItem Header="Выход" Command="{StaticResource CloseApplicationCommand}"/>
+                <!--<MenuItem Header="Выход" >
+                       <MenuItem.Command>
+                    <cmd:CloseApplicationCommand/>
+                    </MenuItem.Command>
+                </MenuItem>-->
             </MenuItem>
             <MenuItem Header="Помощь">
                 <MenuItem Header="о программе"/>
@@ -32,7 +42,15 @@
             </StatusBarItem>
         </StatusBar>
         <TabControl>
-            <TabItem Header="Вкдадка 1">
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="Regular_File" Height="13" 
+                                         Foreground="Chocolate"
+                                         Margin="0,0,5,0"/>
+                        <TextBlock Text="Вкладка1"/>
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="88*"/>
@@ -47,8 +65,12 @@
                         Fill="Blue" Stroke="Red" StrokeThickness="5"
                         RadiusX="20" RadiusY="20" ></Rectangle>
                     <Ellipse Grid.Column="1" Grid.Row="0"
-                             Fill="Red" Stroke="Aqua" StrokeThickness="3">
-                        
+                             Fill="Red" Stroke="Aqua" 
+                             StrokeThickness="3">
+                        <Ellipse.InputBindings>
+                            <MouseBinding Command="{Binding CloseApplicationCommand}" 
+                                          MouseAction="LeftDoubleClick"  />
+                        </Ellipse.InputBindings>
                     </Ellipse>
                     <GridSplitter Width="3" 
                                   Grid.Column="0"

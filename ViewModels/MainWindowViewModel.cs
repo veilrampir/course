@@ -1,4 +1,5 @@
-﻿using course.ViewModels.Base;
+﻿using course.InfraStructure.Commands.Base;
+using course.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,6 +7,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace course.ViewModels
 {
@@ -35,5 +38,24 @@ namespace course.ViewModels
             set => Set( ref _Status, value);
         }
         #endregion
+
+        #region Комманды
+        #region CloseApplicationCommand
+        public ICommand CloseApplicationCommand { get; }
+        private void OnCloseApplicationCommandExecuted(object p)
+        {
+            Application.Current.Shutdown();
+        }
+        private bool CanCloseApplicationCommandExecute(object p) => true;
+        #endregion
+
+
+        #endregion
+        public MainWindowViewModel()
+        {
+            #region
+            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            #endregion
+        }
     }
 }
