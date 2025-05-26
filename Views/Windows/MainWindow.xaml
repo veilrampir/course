@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
+        xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:vm="clr-namespace:course.ViewModels"
         xmlns:cmd="clr-namespace:course.InfraStructure.Commands"
         xmlns:l="clr-namespace:course"
@@ -26,9 +27,24 @@
                     </MenuItem.Command>
                 </MenuItem>-->
             </MenuItem>
+            
             <MenuItem Header="Помощь">
                 <MenuItem Header="о программе"/>
             </MenuItem>
+            <MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="-1">
+                <MenuItem.Header>
+                    <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleLeft"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="+1">
+                <MenuItem.Header>
+                    <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleRight"/>
+                </MenuItem.Header>
+                
+            </MenuItem>
+            
+            
+
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
@@ -40,8 +56,10 @@
                              Value="30"
                              ></ProgressBar>
             </StatusBarItem>
+            <StatusBarItem Content="{Binding SelectedPageIndex}" />
         </StatusBar>
-        <TabControl>
+        
+        <TabControl SelectedIndex="{Binding SelectedPageIndex}">
             <TabItem >
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -82,7 +100,14 @@
                 
 
             </TabItem>
-            <TabItem Header="Вкдадка 2"></TabItem>
+            <TabItem Header="График">
+                <oxy:PlotView Name="plotView">
+                </oxy:PlotView>
+            </TabItem>
+            <TabItem Header="Вкладка 2"></TabItem>
+            <TabItem Header="Вкладка 3"></TabItem>
+            <TabItem Header="Вкладка 4"></TabItem>
+            <TabItem Header="Вкладка 5"></TabItem>
         </TabControl>
     </DockPanel>
 </Window>
